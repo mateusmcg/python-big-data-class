@@ -1,0 +1,1 @@
+exec "C:\Python27\python.exe" mincemeat.py -p changeme localhost
