@@ -21,7 +21,16 @@ def mapfn(k, v):
 					
 def reducefn(k, v):
 	print 'reduce ' + k
-	return v
+	total = 0
+	NomeFilial = ''
+	for index, item in enumerate(v):
+		if item.split(":")[0] == 'Vendas':
+			total = int(item.split(":")[1]) + total
+		if item.split(":")[0] == 'Filial':
+			NomeFilial = item.split(":")[1]
+	L = list()
+	L.append(NomeFilial + " , " + str(total))
+	return L
 
 source = dict((file_name, file_contents(file_name))for file_name in text_files)
 
@@ -35,4 +44,4 @@ results = s.run_server(password="changeme")
 
 w = csv.writer(open(".\\results\\RESULT-2-2.csv", "w"))
 for k, v in results.items():
-	w.writerow([k, v])
+	w.writerow([k, str(v).replace("[","").replace("]","").replace("'","").replace(' ','')])
